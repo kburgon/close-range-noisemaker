@@ -1,13 +1,14 @@
+from typing import Callable
 from gpiozero import DistanceSensor
 
 def is_active(distance, activeDistance):
     return distance < activeDistance
 
-def listen(triggerPin, echoPin, activeDistance, onEnterActiveRange, onWithinActiveRange, onLeaveActiveRange):
+def listen(triggerPin: int, echoPin: int, activeDistance: int, onEnterActiveRange: Callable[[int], None], onWithinActiveRange: Callable[[int], None], onLeaveActiveRange: Callable[[int], None]) -> None:
     ds = DistanceSensor(echo=echoPin, trigger=triggerPin)
     prevDist = ds.distance
     while True:
-        distance = ds.distance
+        distance = int(ds.distance)
         if is_active(distance, activeDistance) and not is_active(prevDist, activeDistance):
             onEnterActiveRange(distance)
 
