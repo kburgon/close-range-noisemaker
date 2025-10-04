@@ -1,4 +1,6 @@
 from datetime import datetime, timedelta
+
+from pydub.audio_segment import extract_wav_headers
 import logger
 import distance_listener
 from sound_playback_helper import sound_player
@@ -24,4 +26,7 @@ def onLeaveActiveRange(distance: int) -> None:
 
 if (__name__ == "__main__"):
     print('Started')
-    distance_listener.listen(1, 1, 30, onEnterActiveRange, onWithinActiveRange, onLeaveActiveRange)
+    trigger_pin = 7
+    echo_pin = 11
+    active_distance = 200
+    distance_listener.listen(trigger_pin, echo_pin, active_distance, onEnterActiveRange, onWithinActiveRange, onLeaveActiveRange)
