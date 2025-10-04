@@ -17,14 +17,15 @@ def ensureCreated(conn: sqlite3.Connection) -> None:
 
 def log_event(event: str, distance: int, dbName: str = ":memory:") -> None:
     try:
-        with sqlite3.connect(dbName) as conn:
-            insertQuery = '''
-                INSERT INTO events (timestamp, event, distance)
-                VALUES (?, ?, ?)
-            '''
-            timestamp = datetime.now().isoformat(timespec='milliseconds')
-            params = (timestamp, event, distance)
+        insertQuery = '''
+            INSERT INTO events (timestamp, event, distance)
+            VALUES (?, ?, ?)
+        '''
+        timestamp = datetime.now().isoformat(timespec='milliseconds')
+        params = (timestamp, event, distance)
+        print(timestamp + ': ' + event)
 
+        with sqlite3.connect(dbName) as conn:
             ensureCreated(conn)
             cur = conn.cursor()
             cur.execute(insertQuery, params)
