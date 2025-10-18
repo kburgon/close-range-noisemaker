@@ -23,7 +23,7 @@ def log_event(event: str, distance: int, dbName: str = ":memory:") -> None:
         '''
         timestamp = datetime.now().isoformat(timespec='milliseconds')
         params = (timestamp, event, distance)
-        print(timestamp + ': ' + event)
+        print(f"{timestamp} - {event}: {distance}")
 
         with sqlite3.connect(dbName) as conn:
             ensureCreated(conn)

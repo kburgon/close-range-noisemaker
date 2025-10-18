@@ -1,2 +1,2 @@
-git+https://github.com/kburgon/sound-playback-helper.git@v0.3#egg=sound_playback_helper
+git+https://github.com/kburgon/sound-playback-helper.git@v0.4#egg=sound_playback_helper
 gpiozero
